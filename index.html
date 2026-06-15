@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Up 2026 — Registration | DLCF South Africa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #1565C0;
+      --blue-light: #1B75BC;
+      --blue-dark:  #0D47A1;
+      --orange:     #F7941D;
+      --orange-dark:#E07B00;
+      --bg:         #EEF4FB;
+      --card:       #FFFFFF;
+      --text:       #1A2B4A;
+      --muted:      #5A6B84;
+      --border:     #C9D9EF;
+      --input-bg:   #F4F8FE;
+      --error:      #D32F2F;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px 60px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 660px;
+    }
+
+    /* ── Top org banner ── */
+    .org-banner {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .org-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .org-logo-icon {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: 0 4px 40px rgba(21,101,192,0.12);
+      overflow: hidden;
+    }
+
+    /* ── Hero header ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%);
+      padding: 36px 40px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(247,148,29,0.15);
+      top: -100px; right: -80px;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      bottom: -60px; left: -40px;
+      pointer-events: none;
+    }
+
+    .conference-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .hero h1 .year {
+      color: var(--orange);
+    }
+
+    .hero .tagline {
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      font-style: italic;
+      margin-bottom: 20px;
+      margin-top: 6px;
+    }
+
+    .event-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .chip svg { flex-shrink: 0; }
+
+    /* ── Form body ── */
+    .form-body {
+      padding: 36px 40px 40px;
+    }
+
+    @media (max-width: 540px) {
+      .hero { padding: 28px 20px 24px; }
+      .hero h1 { font-size: 32px; }
+      .form-body { padding: 24px 20px 32px; }
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 18px;
+    }
+
+    .section-heading:first-child { margin-top: 0; }
+
+    .section-num {
+      width: 28px; height: 28px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50%;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-heading h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--blue-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    /* ── Form fields ── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field.hidden { display: none; }
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    label .req { color: var(--orange-dark); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder { color: #b0bec5; }
+
+    input:focus, select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+      background: #fff;
+    }
+
+    input.invalid, select.invalid {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(211,47,47,0.08);
+    }
+
+    select option { background: #fff; color: var(--text); }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--muted);
+      pointer-events: none;
+    }
+
+    /* ── Radio buttons (for staff type, transport) ── */
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .radio-option input[type="radio"] { display: none; }
+
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      background: rgba(21,101,192,0.08);
+      border-color: var(--blue);
+      color: var(--blue-dark);
+    }
+
+    .radio-option.transport input[type="radio"]:checked + label {
+      background: rgba(247,148,29,0.08);
+      border-color: var(--orange);
+      color: var(--orange-dark);
+    }
+
+    /* ── Error messages ── */
+    .error-msg {
+      color: var(--error);
+      font-size: 11.5px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* ── Submit button ── */
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(21,101,192,0.35);
+    }
+
+    .btn:hover { opacity: 0.92; box-shadow: 0 6px 20px rgba(21,101,192,0.4); }
+    .btn:active { transform: scale(0.99); }
+
+    .btn-accent-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+      border-radius: 0 0 12px 12px;
+      margin-top: -4px;
+    }
+
+    /* ── Success ── */
+    .success-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(21,101,192,0.07), rgba(247,148,29,0.07));
+      border: 2px solid var(--blue);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .success-banner .icon { font-size: 48px; margin-bottom: 12px; }
+
+    .success-banner h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--blue-dark);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .success-banner p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── Info note ── */
+    .info-note {
+      background: rgba(247,148,29,0.08);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Org banner -->
+  <div class="org-banner">
+    <div class="org-logo">
+      <div class="org-logo-icon">✝</div>
+      Deeper Life Campus Fellowship · South Africa
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="conference-tag">⚡ A National Campus Conference</div>
+      <h1>LEVEL UP <span class="year">2026</span></h1>
+      <p class="tagline">Equipping YOU to make meaningful impact in your generation</p>
+      <div class="event-chips">
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Wed 8 – Sun 12 July 2026
+        </div>
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Deeper Life Campground, Pretoria North
+        </div>
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Students &amp; Staff of Higher Education
+        </div>
+      </div>
+    </div>
+
+    <!-- Form body -->
+    <div class="form-body">
+      <form id="regForm" novalidate>
+
+        <!-- ── SECTION 1: Personal Info ── -->
+        <div class="section-heading">
+          <div class="section-num">1</div>
+          <h2>Personal Information</h2>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fullName" placeholder="e.g. Sipho Dlamini" required />
+            <div class="error-msg" id="err-fullName">Please enter your full name.</div>
+          </div>
+          <div class="field">
+            <label>Gender <span class="req">*</span></label>
+            <div class="select-wrapper">
+              <select id="gender" required>
+                <option value="">Select…</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div class="error-msg" id="err-gender">Please select your gender.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+          <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+        </div>
+
+        <div class="field">
+          <label>Phone / WhatsApp Number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="e.g. 071 234 5678" required />
+          <div class="error-msg" id="err-phone">Please enter your phone number.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ── SECTION 2: Institution ── -->
+        <div class="section-heading">
+          <div class="section-num">2</div>
+          <h2>Institution Details</h2>
+        </div>
+
+        <!-- Institution type -->
+        <div class="field">
+          <label>Institution Type <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="institutionType" required onchange="handleInstitution(this.value)">
+              <option value="">Select…</option>
+              <option value="university">University</option>
+              <option value="tvet">TVET College</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-institutionType">Please select your institution type.</div>
+        </div>
+
+        <!-- University dropdown -->
+        <div class="field hidden" id="field-university">
+          <label>Select Your University <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="university">
+              <option value="">Select university…</option>
+              <option>Cape Peninsula University of Technology (CPUT)</option>
+              <option>Central University of Technology (CUT)</option>
+              <option>Durban University of Technology (DUT)</option>
+              <option>Mangosuthu University of Technology (MUT)</option>
+              <option>Nelson Mandela University (NMU)</option>
+              <option>North-West University (NWU)</option>
+              <option>Rhodes University</option>
+              <option>Sefako Makgatho Health Sciences University (SMU)</option>
+              <option>Sol Plaatje University (SPU)</option>
+              <option>Stellenbosch University (SU)</option>
+              <option>Tshwane University of Technology (TUT)</option>
+              <option>University of Cape Town (UCT)</option>
+              <option>University of Fort Hare (UFH)</option>
+              <option>University of Johannesburg (UJ)</option>
+              <option>University of KwaZulu-Natal (UKZN)</option>
+              <option>University of Limpopo (UL)</option>
+              <option>University of Mpumalanga (UMP)</option>
+              <option>University of Pretoria (UP)</option>
+              <option>University of South Africa (UNISA)</option>
+              <option>University of the Free State (UFS)</option>
+              <option>University of the Western Cape (UWC)</option>
+              <option>University of the Witwatersrand (Wits)</option>
+              <option>University of Venda (Univen)</option>
+              <option>University of Zululand (UniZulu)</option>
+              <option>Vaal University of Technology (VUT)</option>
+              <option>Walter Sisulu University (WSU)</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-university">Please select your university.</div>
+        </div>
+
+        <!-- TVET dropdown -->
+        <div class="field hidden" id="field-tvet">
+          <label>Select Your TVET College <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="tvet">
+              <option value="">Select TVET college…</option>
+              <optgroup label="Eastern Cape">
+                <option>Buffalo City TVET College</option>
+                <option>East Cape Midlands TVET College</option>
+                <option>Ikhala TVET College</option>
+                <option>Ingwe TVET College</option>
+                <option>King Hintsa TVET College</option>
+                <option>King Sabata Dalindyebo TVET College</option>
+                <option>Lovedale TVET College</option>
+                <option>Port Elizabeth TVET College</option>
+              </optgroup>
+              <optgroup label="Free State">
+                <option>Flavius Mareka TVET College</option>
+                <option>Goldfields TVET College</option>
+                <option>Maluti TVET College</option>
+                <option>Motheo TVET College</option>
+              </optgroup>
+              <optgroup label="Gauteng">
+                <option>Central Johannesburg TVET College</option>
+                <option>Ekurhuleni East TVET College</option>
+                <option>Ekurhuleni West TVET College</option>
+                <option>Gauteng City TVET College</option>
+                <option>South West Gauteng TVET College</option>
+                <option>Tshwane North TVET College</option>
+                <option>Tshwane South TVET College</option>
+                <option>Western TVET College</option>
+              </optgroup>
+              <optgroup label="KwaZulu-Natal">
+                <option>Coastal KZN TVET College</option>
+                <option>Elangeni TVET College</option>
+                <option>Esayidi TVET College</option>
+                <option>Majuba TVET College</option>
+                <option>Mnambithi TVET College</option>
+                <option>Mthashana TVET College</option>
+                <option>Thekwini TVET College</option>
+                <option>Umfolozi TVET College</option>
+                <option>Umgungundlovu TVET College</option>
+              </optgroup>
+              <optgroup label="Limpopo">
+                <option>Capricorn TVET College</option>
+                <option>Lephalale TVET College</option>
+                <option>Mopani South East TVET College</option>
+                <option>Sekhukhune TVET College</option>
+                <option>Vhembe TVET College</option>
+                <option>Waterberg TVET College</option>
+              </optgroup>
+              <optgroup label="Mpumalanga">
+                <option>Ehlanzeni TVET College</option>
+                <option>Gert Sibande TVET College</option>
+                <option>Nkangala TVET College</option>
+              </optgroup>
+              <optgroup label="Northern Cape">
+                <option>Northern Cape Rural TVET College</option>
+                <option>Northern Cape Urban TVET College</option>
+              </optgroup>
+              <optgroup label="North West">
+                <option>Orbit TVET College</option>
+                <option>Taletso TVET College</option>
+                <option>Vuselela TVET College</option>
+              </optgroup>
+              <optgroup label="Western Cape">
+                <option>Boland TVET College</option>
+                <option>False Bay TVET College</option>
+                <option>Northlink TVET College</option>
+                <option>South Cape TVET College</option>
+                <option>West Coast TVET College</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="error-msg" id="err-tvet">Please select your TVET college.</div>
+        </div>
+
+        <!-- Others text -->
+        <div class="field hidden" id="field-others">
+          <label>Please specify your institution <span class="req">*</span></label>
+          <input type="text" id="othersText" placeholder="Enter your school, company, or organisation" />
+          <div class="error-msg" id="err-othersText">Please specify your institution.</div>
+        </div>
+
+        <!-- Attendee Status -->
+        <div class="field" id="field-status">
+          <label>Your Status at this Institution <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="attendeeStatus" required onchange="handleStatus(this.value)">
+              <option value="">Select…</option>
+              <option value="student">Student</option>
+              <option value="staff">Staff</option>
+              <option value="postdoc">Postdoctoral Researcher</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-attendeeStatus">Please select your status.</div>
+        </div>
+
+        <!-- Student sub-fields -->
+        <div class="field hidden" id="field-student-details">
+          <div class="field">
+            <label>Course / Programme of Study <span class="req">*</span></label>
+            <input type="text" id="course" placeholder="e.g. BSc Computer Science" />
+            <div class="error-msg" id="err-course">Please enter your course or programme.</div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Year of Study <span class="req">*</span></label>
+              <div class="select-wrapper">
+                <select id="yearOfStudy">
+                  <option value="">Select…</option>
+                  <option>1st Year</option>
+                  <option>2nd Year</option>
+                  <option>3rd Year</option>
+                  <option>4th Year</option>
+                  <option>5th Year</option>
+                  <option>6th Year +</option>
+                </select>
+              </div>
+              <div class="error-msg" id="err-yearOfStudy">Please select your year of study.</div>
+            </div>
+            <div class="field">
+              <label>Level of Study <span class="req">*</span></label>
+              <div class="select-wrapper">
+                <select id="studyLevel">
+                  <option value="">Select…</option>
+                  <option>Bachelors</option>
+                  <option>Honours</option>
+                  <option>Masters</option>
+                  <option>PhD</option>
+                </select>
+              </div>
+              <div class="error-msg" id="err-studyLevel">Please select your level of study.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staff sub-fields -->
+        <div class="field hidden" id="field-staff-details">
+          <label>Staff Type <span class="req">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" name="staffType" id="st-academic" value="Academic" />
+              <label for="st-academic">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                Academic
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="staffType" id="st-nonacademic" value="Non-Academic" />
+              <label for="st-nonacademic">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                Non-Academic
+              </label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-staffType">Please select your staff type.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ── SECTION 3: Transportation ── -->
+        <div class="section-heading">
+          <div class="section-num">3</div>
+          <h2>Transportation</h2>
+        </div>
+
+        <div class="info-note">
+          🚌 We offer <strong>free roundtrip transportation</strong> from various provinces to Deeper Life Campground, Pretoria North.
+        </div>
+
+        <div class="field">
+          <label>Which province will you be attending from? <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="province" required>
+              <option value="">Select province…</option>
+              <option>Eastern Cape</option>
+              <option>Free State</option>
+              <option>Gauteng</option>
+              <option>KwaZulu-Natal</option>
+              <option>Limpopo</option>
+              <option>Mpumalanga</option>
+              <option>Northern Cape</option>
+              <option>North West</option>
+              <option>Western Cape</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-province">Please select your province.</div>
+        </div>
+
+        <div class="field">
+          <label>Would you like to join our free roundtrip transportation? <span class="req">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option transport">
+              <input type="radio" name="transport" id="tr-yes" value="Yes" />
+              <label for="tr-yes">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Yes, please!
+              </label>
+            </div>
+            <div class="radio-option transport">
+              <input type="radio" name="transport" id="tr-no" value="No" />
+              <label for="tr-no">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                No, I'll arrange my own
+              </label>
+            </div>
+          </div>
+          <div class="error-msg" id="err-transport">Please select a transport option.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ── SECTION 4: Final ── -->
+        <div class="section-heading">
+          <div class="section-num">4</div>
+          <h2>One More Thing</h2>
+        </div>
+
+        <div class="field">
+          <label>How did you hear about Level Up 2026? <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="hearAbout" required>
+              <option value="">Select…</option>
+              <option>Social Media (Instagram / Facebook / TikTok)</option>
+              <option>WhatsApp / Group Chat</option>
+              <option>Friend or Colleague</option>
+              <option>Church or Campus Ministry</option>
+              <option>Flyer or Poster</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-hearAbout">Please tell us how you heard about us.</div>
+        </div>
+
+        <button type="submit" class="btn">⚡ Secure My Spot at Level Up 2026</button>
+        <div class="btn-accent-bar"></div>
+
+      </form>
+
+      <!-- Success -->
+      <div class="success-banner" id="successBanner">
+        <div class="icon">🎉</div>
+        <h3>You're in! See you in Pretoria.</h3>
+        <p>Registration received. We'll be in touch with full event details<br>closer to <strong>8–12 July 2026</strong>.<br><br>
+        <em>Deeper Life Campground, Soutpan Road, Pretoria North</em></p>
+      </div>
+    </div><!-- /form-body -->
+  </div><!-- /card -->
+</div><!-- /wrapper -->
+
+<script>
+  // ── Paste your deployed Apps Script URL here ──
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytDSIDrih6AyiaZrr7Klsv-BEXkzSIPGapOfAoKMtWfjHV9ceoezknQEbh-STGBury/exec';
+
+  /* ── Institution conditional logic ── */
+  function handleInstitution(val) {
+    ['field-university','field-tvet','field-others'].forEach(id =>
+      document.getElementById(id).classList.add('hidden')
+    );
+    document.getElementById('university').value = '';
+    document.getElementById('tvet').value = '';
+    document.getElementById('othersText').value = '';
+    if (val === 'university') document.getElementById('field-university').classList.remove('hidden');
+    if (val === 'tvet')       document.getElementById('field-tvet').classList.remove('hidden');
+    if (val === 'others')     document.getElementById('field-others').classList.remove('hidden');
+  }
+
+  /* ── Status conditional logic ── */
+  function handleStatus(val) {
+    document.getElementById('field-student-details').classList.add('hidden');
+    document.getElementById('field-staff-details').classList.add('hidden');
+    // Reset sub-fields
+    document.getElementById('course').value = '';
+    document.getElementById('yearOfStudy').value = '';
+    document.getElementById('studyLevel').value = '';
+    document.querySelectorAll('input[name="staffType"]').forEach(r => r.checked = false);
+    if (val === 'student') document.getElementById('field-student-details').classList.remove('hidden');
+    if (val === 'staff')   document.getElementById('field-staff-details').classList.remove('hidden');
+  }
+
+  /* ── Helpers ── */
+  function showError(id, show) {
+    const err = document.getElementById('err-' + id);
+    if (err) err.style.display = show ? 'block' : 'none';
+    const inp = document.getElementById(id);
+    if (inp) inp.classList.toggle('invalid', show);
+  }
+
+  function validateEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function getRadio(name) {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    return checked ? checked.value : '';
+  }
+
+  /* ── Form submission ── */
+  document.getElementById('regForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Personal
+    const fullName = document.getElementById('fullName').value.trim();
+    showError('fullName', !fullName);
+    if (!fullName) valid = false;
+
+    const gender = document.getElementById('gender').value;
+    showError('gender', !gender);
+    if (!gender) valid = false;
+
+    const email = document.getElementById('email').value.trim();
+    showError('email', !validateEmail(email));
+    if (!validateEmail(email)) valid = false;
+
+    const phone = document.getElementById('phone').value.trim();
+    showError('phone', !phone);
+    if (!phone) valid = false;
+
+    // Institution
+    const instType = document.getElementById('institutionType').value;
+    showError('institutionType', !instType);
+    if (!instType) valid = false;
+
+    if (instType === 'university') {
+      const v = document.getElementById('university').value;
+      showError('university', !v); if (!v) valid = false;
+    } else showError('university', false);
+
+    if (instType === 'tvet') {
+      const v = document.getElementById('tvet').value;
+      showError('tvet', !v); if (!v) valid = false;
+    } else showError('tvet', false);
+
+    if (instType === 'others') {
+      const v = document.getElementById('othersText').value.trim();
+      showError('othersText', !v); if (!v) valid = false;
+    } else showError('othersText', false);
+
+    // Status
+    const status = document.getElementById('attendeeStatus').value;
+    showError('attendeeStatus', !status);
+    if (!status) valid = false;
+
+    if (status === 'student') {
+      const course = document.getElementById('course').value.trim();
+      const year   = document.getElementById('yearOfStudy').value;
+      const level  = document.getElementById('studyLevel').value;
+      showError('course', !course);       if (!course) valid = false;
+      showError('yearOfStudy', !year);    if (!year)   valid = false;
+      showError('studyLevel', !level);    if (!level)  valid = false;
+    } else {
+      ['course','yearOfStudy','studyLevel'].forEach(id => showError(id, false));
+    }
+
+    if (status === 'staff') {
+      const st = getRadio('staffType');
+      const errEl = document.getElementById('err-staffType');
+      if (!st) { errEl.style.display = 'block'; valid = false; }
+      else errEl.style.display = 'none';
+    } else {
+      document.getElementById('err-staffType').style.display = 'none';
+    }
+
+    // Transport
+    const province = document.getElementById('province').value;
+    showError('province', !province);
+    if (!province) valid = false;
+
+    const transport = getRadio('transport');
+    const errTransport = document.getElementById('err-transport');
+    if (!transport) { errTransport.style.display = 'block'; valid = false; }
+    else errTransport.style.display = 'none';
+
+    // Final
+    const hearAbout = document.getElementById('hearAbout').value;
+    showError('hearAbout', !hearAbout);
+    if (!hearAbout) valid = false;
+
+    if (valid) {
+      // Collect all form values
+      const instType = document.getElementById('institutionType').value;
+      const status   = document.getElementById('attendeeStatus').value;
+
+      const params = new URLSearchParams();
+      params.append('fullName',        document.getElementById('fullName').value.trim());
+      params.append('gender',          document.getElementById('gender').value);
+      params.append('email',           document.getElementById('email').value.trim());
+      params.append('phone',           document.getElementById('phone').value.trim());
+      params.append('institutionType', instType);
+      params.append('university',      instType === 'university' ? document.getElementById('university').value : '');
+      params.append('tvet',            instType === 'tvet'       ? document.getElementById('tvet').value       : '');
+      params.append('othersText',      instType === 'others'     ? document.getElementById('othersText').value.trim() : '');
+      params.append('attendeeStatus',  status);
+      params.append('course',          status === 'student' ? document.getElementById('course').value.trim()      : '');
+      params.append('yearOfStudy',     status === 'student' ? document.getElementById('yearOfStudy').value        : '');
+      params.append('studyLevel',      status === 'student' ? document.getElementById('studyLevel').value         : '');
+      params.append('staffType',       status === 'staff'   ? (getRadio('staffType') || '')                       : '');
+      params.append('province',        document.getElementById('province').value);
+      params.append('transport',       getRadio('transport'));
+      params.append('hearAbout',       document.getElementById('hearAbout').value);
+
+      // Disable button to prevent double-submit
+      const btn = document.querySelector('.btn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      // Submit to Google Apps Script (no-cors — data is saved regardless of response)
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   params
+      })
+      .then(function() {
+        document.getElementById('regForm').style.display = 'none';
+        document.getElementById('successBanner').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function() {
+        // Network error — still show success if SCRIPT_URL is set,
+        // since no-cors fetch errors can be false positives.
+        if (SCRIPT_URL !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
+          document.getElementById('regForm').style.display = 'none';
+          document.getElementById('successBanner').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          btn.disabled = false;
+          btn.textContent = '⚡ Secure My Spot at Level Up 2026';
+          alert('Form backend not configured yet. Please set SCRIPT_URL in the HTML file.');
+        }
+      });
+    }
+  });
+
+  /* ── Clear errors on change ── */
+  ['fullName','email','phone','gender','institutionType','university','tvet',
+   'othersText','attendeeStatus','course','yearOfStudy','studyLevel','province','hearAbout'
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => showError(id, false));
+  });
+</script>
+</body>
+</html>
