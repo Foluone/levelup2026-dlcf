@@ -754,6 +754,13 @@
           <div class="error-msg" id="err-transport">Please select a transport option.</div>
         </div>
 
+        <!-- Pickup address (conditional on transport = Yes) -->
+        <div class="field hidden" id="field-address">
+          <label>Pickup Address <span class="req">*</span></label>
+          <input type="text" id="pickupAddress" placeholder="e.g. 12 Main Street, Soweto, Johannesburg" />
+          <div class="error-msg" id="err-pickupAddress">Please enter your pickup address.</div>
+        </div>
+
         <div class="section-divider"></div>
 
         <!-- ── SECTION 4: Final ── -->
@@ -770,7 +777,7 @@
               <option>Social Media (Instagram / Facebook / TikTok)</option>
               <option>WhatsApp / Group Chat</option>
               <option>Friend or Colleague</option>
-              <option>Announcement in Church</option>
+              <option>Church Announcement</option>
               <option>Flyer or Poster</option>
               <option>Other</option>
             </select>
@@ -778,7 +785,7 @@
           <div class="error-msg" id="err-hearAbout">Please tell us how you heard about us.</div>
         </div>
 
-        <button type="submit" class="btn">Register for Level Up 2026</button>
+        <button type="submit" class="btn">⚡ Secure My Spot at Level Up 2026</button>
         <div class="btn-accent-bar"></div>
 
       </form>
@@ -796,7 +803,7 @@
 
 <script>
   // ── Paste your deployed Apps Script URL here ──
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytDSIDrih6AyiaZrr7Klsv-BEXkzSIPGapOfAoKMtWfjHV9ceoezknQEbh-STGBury/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2cjKoW_ygzhd6fSedRkBaSJYOQSqisb8KB7SvMp9GDHN7kAHcWNRLZzysDODKqPGx/exec';
 
   /* ── Institution conditional logic ── */
   function handleInstitution(val) {
@@ -918,6 +925,14 @@
     if (!transport) { errTransport.style.display = 'block'; valid = false; }
     else errTransport.style.display = 'none';
 
+    if (transport === 'Yes') {
+      const addr = document.getElementById('pickupAddress').value.trim();
+      showError('pickupAddress', !addr);
+      if (!addr) valid = false;
+    } else {
+      showError('pickupAddress', false);
+    }
+
     // Final
     const hearAbout = document.getElementById('hearAbout').value;
     showError('hearAbout', !hearAbout);
@@ -944,6 +959,7 @@
       params.append('staffType',       status === 'staff'   ? (getRadio('staffType') || '')                       : '');
       params.append('province',        document.getElementById('province').value);
       params.append('transport',       getRadio('transport'));
+      params.append('pickupAddress',   transport === 'Yes' ? document.getElementById('pickupAddress').value.trim() : '');
       params.append('hearAbout',       document.getElementById('hearAbout').value);
 
       // Disable button to prevent double-submit
@@ -971,11 +987,25 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           btn.disabled = false;
-          btn.textContent = '⚡ Secure My Spot at Level Up 2026';
+          btn.textContent = 'Register for Level Up 2026';
           alert('Form backend not configured yet. Please set SCRIPT_URL in the HTML file.');
         }
       });
     }
+  });
+
+  /* ── Transport conditional logic ── */
+  document.querySelectorAll('input[name="transport"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      const addrField = document.getElementById('field-address');
+      if (this.value === 'Yes') {
+        addrField.classList.remove('hidden');
+      } else {
+        addrField.classList.add('hidden');
+        document.getElementById('pickupAddress').value = '';
+        showError('pickupAddress', false);
+      }
+    });
   });
 
   /* ── Clear errors on change ── */
