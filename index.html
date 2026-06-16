@@ -500,6 +500,7 @@
               <option value="">Select…</option>
               <option value="university">University</option>
               <option value="tvet">TVET College</option>
+              <option value="research">Research Institute</option>
               <option value="others">Others</option>
             </select>
           </div>
@@ -620,6 +621,34 @@
           <div class="error-msg" id="err-tvet">Please select your TVET college.</div>
         </div>
 
+        <!-- Research Institute dropdown -->
+        <div class="field hidden" id="field-research">
+          <label>Select Your Research Institute <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="research">
+              <option value="">Select research institute…</option>
+              <option>Agricultural Research Council (ARC)</option>
+              <option>Council for Geoscience (CGS)</option>
+              <option>Council for Scientific and Industrial Research (CSIR)</option>
+              <option>Human Sciences Research Council (HSRC)</option>
+              <option>iThemba LABS</option>
+              <option>Mintek</option>
+              <option>National Health Laboratory Service (NHLS)</option>
+              <option>National Institute for Communicable Diseases (NICD)</option>
+              <option>National Metrology Institute of South Africa (NMISA)</option>
+              <option>National Research Foundation (NRF)</option>
+              <option>South African Medical Research Council (SAMRC)</option>
+              <option>South African National Biodiversity Institute (SANBI)</option>
+              <option>South African National Energy Development Institute (SANEDI)</option>
+              <option>South African National Space Agency (SANSA)</option>
+              <option>South African Nuclear Energy Corporation (NECSA)</option>
+              <option>South African Bureau of Standards (SABS)</option>
+              <option>Water Research Commission (WRC)</option>
+            </select>
+          </div>
+          <div class="error-msg" id="err-research">Please select your research institute.</div>
+        </div>
+
         <!-- Others text -->
         <div class="field hidden" id="field-others">
           <label>Please specify your institution <span class="req">*</span></label>
@@ -633,7 +662,7 @@
           <div class="select-wrapper">
             <select id="attendeeStatus" required onchange="handleStatus(this.value)">
               <option value="">Select…</option>
-              <option value="student">Student</option>
+              <option value="student" class="status-student">Student</option>
               <option value="staff">Staff</option>
               <option value="postdoc">Postdoctoral Researcher</option>
             </select>
@@ -711,13 +740,13 @@
         </div>
 
         <div class="info-note">
-          We offer <strong>free roundtrip transportation</strong> from various provinces to Deeper Life Campground, Pretoria North.
+          We are pleased to <strong>assist with transportation</strong> for attendees from various provinces to Deeper Life Campground, Pretoria North.
         </div>
 
         <div class="field">
           <label>Which province will you be attending from? <span class="req">*</span></label>
           <div class="select-wrapper">
-            <select id="province" required>
+            <select id="province" required onchange="handleProvince(this.value)">
               <option value="">Select province…</option>
               <option>Eastern Cape</option>
               <option>Free State</option>
@@ -728,13 +757,21 @@
               <option>Northern Cape</option>
               <option>North West</option>
               <option>Western Cape</option>
+              <option value="others">Others (outside South Africa)</option>
             </select>
           </div>
           <div class="error-msg" id="err-province">Please select your province.</div>
         </div>
 
+        <!-- Country field for non-SA attendees -->
+        <div class="field hidden" id="field-country">
+          <label>Country / Location <span class="req">*</span></label>
+          <input type="text" id="country" placeholder="e.g. Zimbabwe, Nigeria, United Kingdom" />
+          <div class="error-msg" id="err-country">Please enter your country or location.</div>
+        </div>
+
         <div class="field">
-          <label>Would you like to join our free roundtrip transportation? <span class="req">*</span></label>
+          <label>Would you like to join our transportation arrangement? <span class="req">*</span></label>
           <div class="radio-group">
             <div class="radio-option transport">
               <input type="radio" name="transport" id="tr-yes" value="Yes" />
@@ -777,7 +814,7 @@
               <option>Social Media (Instagram / Facebook / TikTok)</option>
               <option>WhatsApp / Group Chat</option>
               <option>Friend or Colleague</option>
-              <option>Church Announcement</option>
+              <option>Announcement in Church</option>
               <option>Flyer or Poster</option>
               <option>Other</option>
             </select>
@@ -802,20 +839,47 @@
 </div><!-- /wrapper -->
 
 <script>
-  // ── Paste your deployed Apps Script URL here https://script.google.com/macros/s/AKfycby2cjKoW_ygzhd6fSedRkBaSJYOQSqisb8KB7SvMp9GDHN7kAHcWNRLZzysDODKqPGx/exec── 
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2cjKoW_ygzhd6fSedRkBaSJYOQSqisb8KB7SvMp9GDHN7kAHcWNRLZzysDODKqPGx/exec';
+  // ── Paste your deployed Apps Script URL here ──
+  //var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytDSIDrih6AyiaZrr7Klsv-BEXkzSIPGapOfAoKMtWfjHV9ceoezknQEbh-STGBury/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTdG01DF6_mh9nuIKBRzmax5Us8O_U6YYA4wdK_AyOHa_weLazol7C4HpqCxFznW_Q/exec';
 
   /* ── Institution conditional logic ── */
   function handleInstitution(val) {
-    ['field-university','field-tvet','field-others'].forEach(id =>
+    ['field-university','field-tvet','field-research','field-others'].forEach(id =>
       document.getElementById(id).classList.add('hidden')
     );
     document.getElementById('university').value = '';
     document.getElementById('tvet').value = '';
+    document.getElementById('research').value = '';
     document.getElementById('othersText').value = '';
+
     if (val === 'university') document.getElementById('field-university').classList.remove('hidden');
     if (val === 'tvet')       document.getElementById('field-tvet').classList.remove('hidden');
+    if (val === 'research')   document.getElementById('field-research').classList.remove('hidden');
     if (val === 'others')     document.getElementById('field-others').classList.remove('hidden');
+
+    // Reset and filter status options based on institution type
+    var statusSelect = document.getElementById('attendeeStatus');
+    statusSelect.value = '';
+    handleStatus(''); // hide all sub-fields
+    var studentOption = statusSelect.querySelector('option[value="student"]');
+    if (val === 'research') {
+      studentOption.style.display = 'none';
+    } else {
+      studentOption.style.display = '';
+    }
+  }
+
+  /* ── Province conditional logic ── */
+  function handleProvince(val) {
+    var countryField = document.getElementById('field-country');
+    if (val === 'others') {
+      countryField.classList.remove('hidden');
+    } else {
+      countryField.classList.add('hidden');
+      document.getElementById('country').value = '';
+      showError('country', false);
+    }
   }
 
   /* ── Status conditional logic ── */
@@ -885,6 +949,11 @@
       showError('tvet', !v); if (!v) valid = false;
     } else showError('tvet', false);
 
+    if (instType === 'research') {
+      const v = document.getElementById('research').value;
+      showError('research', !v); if (!v) valid = false;
+    } else showError('research', false);
+
     if (instType === 'others') {
       const v = document.getElementById('othersText').value.trim();
       showError('othersText', !v); if (!v) valid = false;
@@ -920,6 +989,12 @@
     showError('province', !province);
     if (!province) valid = false;
 
+    if (province === 'others') {
+      const country = document.getElementById('country').value.trim();
+      showError('country', !country);
+      if (!country) valid = false;
+    } else showError('country', false);
+
     const transport = getRadio('transport');
     const errTransport = document.getElementById('err-transport');
     if (!transport) { errTransport.style.display = 'block'; valid = false; }
@@ -951,13 +1026,16 @@
       params.append('institutionType', instType);
       params.append('university',      instType === 'university' ? document.getElementById('university').value : '');
       params.append('tvet',            instType === 'tvet'       ? document.getElementById('tvet').value       : '');
+      params.append('research',        instType === 'research'   ? document.getElementById('research').value   : '');
       params.append('othersText',      instType === 'others'     ? document.getElementById('othersText').value.trim() : '');
       params.append('attendeeStatus',  status);
       params.append('course',          status === 'student' ? document.getElementById('course').value.trim()      : '');
       params.append('yearOfStudy',     status === 'student' ? document.getElementById('yearOfStudy').value        : '');
       params.append('studyLevel',      status === 'student' ? document.getElementById('studyLevel').value         : '');
       params.append('staffType',       status === 'staff'   ? (getRadio('staffType') || '')                       : '');
-      params.append('province',        document.getElementById('province').value);
+      const provinceVal = document.getElementById('province').value;
+      params.append('province',        provinceVal === 'others' ? 'Outside South Africa' : provinceVal);
+      params.append('country',         provinceVal === 'others' ? document.getElementById('country').value.trim() : '');
       params.append('transport',       getRadio('transport'));
       params.append('pickupAddress',   transport === 'Yes' ? document.getElementById('pickupAddress').value.trim() : '');
       params.append('hearAbout',       document.getElementById('hearAbout').value);
@@ -987,7 +1065,7 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           btn.disabled = false;
-          btn.textContent = 'Register for Level Up 2026';
+          btn.textContent = 'REgister for Level Up 2026';
           alert('Form backend not configured yet. Please set SCRIPT_URL in the HTML file.');
         }
       });
